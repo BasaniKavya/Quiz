@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valentine Quiz for Vijay ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+    body { background: linear-gradient(135deg, #ff758c, #ff7eb3); min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+    .card { background: white; width: 90%; max-width: 420px; padding: 30px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); text-align: center; }
+    h1 { color: #ff4b6e; margin-bottom: 10px; }
+    p { color: #444; margin-bottom: 20px; }
+    button { background: #ff4b6e; border: none; padding: 12px 22px; color: white; border-radius: 25px; cursor: pointer; font-size: 16px; margin: 8px; transition: 0.3s; }
+    button:hover { transform: scale(1.05); }
+    .hidden { display: none; }
+    #scoreBox { margin-bottom: 15px; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Valentine Quiz ❤️</h1>
+    <p id="scoreBox">Score: 0 ❤️</p>
+    <p id="question">Hey Vijay! Ready for a small quiz from Basani?</p>
+    <div id="options">
+      <button onclick="next(1)">Yes 😍</button>
+      <button onclick="next(1)">Of course ❤️</button>
+    </div>
+    <p id="result" class="hidden"></p>
+  </div>
+
+  <script>
+    let step = 0;
+    let score = 0;
+
+    const quiz = [
+      { q: "Who loves Vijay the most? 💖", o: ["Kavya 😘", "Basani 😍"], a: "Both 😉" },
+      { q: "What makes Basani happiest? 😌", o: ["Meeting her  😊", "Calling her 📞"], a: "Everything you do ❤️" },
+      { q: "Do you feel irritated with basani's silence? 👀", o: ["Yes 💕", "Yes 😜"], a: "Obviously Basani 😍" },
+      { q: "What should Vijay do when Basani is sad? 🥺", o: ["Hug her 🤗", "Never leave her 🫂"], a: "Both forever ❤️" },
+      { q: "What is Basani addicted to? 😏", o: ["Vijay's voice 🎧", "Vijay's care 💖"], a: "Vijay's voice 😘" },
+      { q: "Where does Basani feel safest? 🏡", o: ["With Vijay 💑", "In Vijay's arms 🤍"], a: "In Vijay's arms ❤️" },
+      { q: "How long will Vijay love Basani? ⏳", o: ["Forever ♾️", "More than forever 💍"], a: "Endlessly 😍" },
+      { q: "Will you be Basani's Valentine today and always? 💌", o: ["Yes forever 💖", "Obviously 😘"], a: "I knew it 😍" }
+    ];
+
+    function next() {
+      score++;
+      document.getElementById('scoreBox').innerText = 'Score: ' + score + ' ❤️';
+      burstHearts();
+
+      if (step < quiz.length) {
+        document.getElementById('question').innerText = quiz[step].q;
+        const opts = document.getElementById('options');
+        opts.innerHTML = '';
+        quiz[step].o.forEach(text => {
+          const b = document.createElement('button');
+          b.innerText = text;
+          b.onclick = () => next();
+          opts.appendChild(b);
+        });
+        step++;
+      } else {
+        document.getElementById('question').innerText = "Happy Valentine Vijay ❤️";
+        document.getElementById('options').classList.add('hidden');
+        const r = document.getElementById('result');
+        r.classList.remove('hidden');
+        r.innerHTML = `Basani loves you endlessly 💖 Final Score: ${score} ❤️<br><br>Your Winning Gift: A Big Kiss 😘💋<br><button id='claimKissBtn'>Claim Your Kiss 💋</button>`;
+        kissBurst();
+        document.getElementById('claimKissBtn').addEventListener('click', ()=> alert('😘💋 Kiss Claimed! Love you Vijay ❤️'));
+      }
+    }
+
+    function burstHearts(){
+      for(let i=0;i<12;i++){
+        const h=document.createElement('span');
+        h.innerText='❤️';
+        h.style.position='fixed';
+        h.style.left=Math.random()*100+'vw';
+        h.style.bottom='-20px';
+        h.style.fontSize=Math.random()*20+16+'px';
+        h.style.animation='rise 4s linear';
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),4000);
+      }
+    }
+
+    function kissBurst(){
+      for(let i=0;i<18;i++){
+        const k=document.createElement('span');
+        k.innerText='💋';
+        k.style.position='fixed';
+        k.style.left=Math.random()*100+'vw';
+        k.style.bottom='-20px';
+        k.style.fontSize=Math.random()*22+18+'px';
+        k.style.animation='rise 5s linear';
+        document.body.appendChild(k);
+        setTimeout(()=>k.remove(),5000);
+      }
+    }
+  </script>
+
+  <style>
+    @keyframes rise { to { transform: translateY(-110vh); opacity: 0; } }
+  </style>
+
+</body>
+</html>
